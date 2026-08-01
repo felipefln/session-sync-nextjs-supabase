@@ -17,7 +17,7 @@ export function SignOutButton() {
   }
 
   return (
-    <button type="button" onClick={handleSignOut}>
+    <button type="button" className="btn btn-secondary" onClick={handleSignOut}>
       Sair
     </button>
   )
