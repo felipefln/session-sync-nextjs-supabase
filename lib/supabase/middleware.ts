@@ -45,5 +45,14 @@ export async function updateSession(request: NextRequest) {
     return NextResponse.redirect(url)
   }
 
+  // Sessão chegou via broadcast de outra aba enquanto esta ficou parada em
+  // /login: manda pra rota autenticada em vez de deixar o form parado ali.
+  if (user && request.nextUrl.pathname.startsWith('/login')) {
+    const url = request.nextUrl.clone()
+    url.pathname = request.nextUrl.searchParams.get('redirectTo') ?? '/'
+    url.searchParams.delete('redirectTo')
+    return NextResponse.redirect(url)
+  }
+
   return supabaseResponse
 }

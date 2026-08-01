@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
+import { SignOutButton } from './sign-out-button'
 
 export default async function Home() {
   const supabase = await createClient()
@@ -10,9 +11,7 @@ export default async function Home() {
     <main style={{ padding: '3rem', fontFamily: 'system-ui, sans-serif' }}>
       <h1>Session Sync Next.js Supabase</h1>
       <p>Logado como: {user?.email}</p>
-      <form action="/auth/signout" method="post">
-        <button type="submit">Sair</button>
-      </form>
+      <SignOutButton />
     </main>
   )
 }
