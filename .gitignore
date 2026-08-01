@@ -3,4 +3,6 @@ node_modules
 out
 .DS_Store
 .env*
+!.env*.example
 .vscode
+tsconfig.tsbuildinfo
