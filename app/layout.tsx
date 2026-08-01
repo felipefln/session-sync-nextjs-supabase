@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import { SessionSyncProvider } from './session-sync-provider'
 
 export const metadata: Metadata = {
   title: 'Session Sync Next.js Supabase',
@@ -9,7 +10,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR">
-      <body>{children}</body>
+      <body>
+        <SessionSyncProvider>{children}</SessionSyncProvider>
+      </body>
     </html>
   )
 }
