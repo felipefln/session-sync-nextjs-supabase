@@ -37,6 +37,14 @@ export async function updateSession(request: NextRequest) {
   } = await supabase.auth.getUser()
 
   const isPublicPath = PUBLIC_PATHS.some((path) => request.nextUrl.pathname.startsWith(path))
+  const isApiPath = request.nextUrl.pathname.startsWith('/api')
+
+  // Rotas de API não devem receber um redirect HTML: quem chama é `fetch()`,
+  // não navegação de página. Sem sessão, a própria rota responde 401 em JSON
+  // e quem decide o que fazer com isso é o client (ver fetchWithAuth).
+  if (!user && isApiPath) {
+    return supabaseResponse
+  }
 
   if (!user && !isPublicPath) {
     const url = request.nextUrl.clone()
