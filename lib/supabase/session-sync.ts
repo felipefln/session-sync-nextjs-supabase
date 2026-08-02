@@ -20,7 +20,9 @@ export type SessionSyncEvent =
   | { type: 'refresh-success' }
   | { type: 'refresh-error'; error: string }
 
-type Listener = (event: SessionSyncEvent & { at: number }) => void
+export type SessionSyncLogEntry = SessionSyncEvent & { at: number }
+
+type Listener = (event: SessionSyncLogEntry) => void
 
 const listeners = new Set<Listener>()
 

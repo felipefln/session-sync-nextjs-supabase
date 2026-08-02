@@ -1,6 +1,6 @@
+import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import { SignOutButton } from './sign-out-button'
-import { ProtectedDemo } from './protected-demo'
 
 export default async function Home() {
   const supabase = await createClient()
@@ -23,7 +23,16 @@ export default async function Home() {
         </div>
       </div>
 
-      <ProtectedDemo />
+      <section className="panel">
+        <h2>Demonstração multi-aba</h2>
+        <p className="subtitle">
+          Coordenação de refresh entre abas e recuperação de sessão em 401, com log de eventos ao
+          vivo.
+        </p>
+        <Link href="/demo" className="btn btn-primary" style={{ display: 'inline-block' }}>
+          Abrir demo
+        </Link>
+      </section>
     </main>
   )
 }
