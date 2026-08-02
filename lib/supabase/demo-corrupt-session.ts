@@ -7,17 +7,17 @@
 // porque a assinatura não bate — o mesmo efeito prático de uma sessão SSR
 // dessincronizada, sem precisar esperar o token expirar de verdade.
 
-function fromBase64Url(value: string) {
+export function fromBase64Url(value: string) {
   const base64 = value.replace(/-/g, '+').replace(/_/g, '/')
   const padded = base64 + '='.repeat((4 - (base64.length % 4)) % 4)
   return atob(padded)
 }
 
-function toBase64Url(value: string) {
+export function toBase64Url(value: string) {
   return btoa(value).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')
 }
 
-function tamperSignature(accessToken: string) {
+export function tamperSignature(accessToken: string) {
   const parts = accessToken.split('.')
   if (parts.length !== 3) return accessToken
   const signature = parts[2]
